@@ -30,8 +30,8 @@ plt.figure(figsize=(8, 6))
 plt.rc('font', family='sans-serif', size=14)
 ax = plt.subplot(1, 1, 1)
 ax.get_yaxis().get_major_formatter().set_useOffset(False)
-plt.ylabel("Open-circuit Voltage [V]", fontsize=16)
-plt.xlabel("Temperature Difference [T]", fontsize=16)
+plt.ylabel("Open-circuit Voltage [V]", fontsize=22)
+plt.xlabel("Temperature Difference [T]", fontsize=22)
 
 
 
@@ -39,6 +39,8 @@ plt.plot(temp_diff, voltage, marker='', color='green', linewidth=3, label='MOOSE
 plt.plot(sim_BiTe['T'], sim_BiTe['V'], label='Simulation - Chen et al.', color='orange', linewidth=3)
 plt.plot(expr_BiTe['T'], expr_BiTe['V'], marker='s', markersize=10, linestyle="", label='Experiment', color='cornflowerblue')
 
-ax.legend(frameon=False, prop={'size':16})
+ax.legend(frameon=False, prop={'size':20})
+ax.tick_params(axis='both', labelsize=20)
 plt.tight_layout()
+# plt.grid(alpha=0.4)
 plt.savefig('TEM_open_circuit_voltage.png', dpi=1000)

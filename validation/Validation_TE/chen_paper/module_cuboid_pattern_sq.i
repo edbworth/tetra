@@ -11,16 +11,7 @@ connect_height = 0.2
 elem_connect =2
 nx = 7
 ny = 16
-# leg_size = 1.5
-# leg_height = 0.75
-# elem_leg = 15
-# elem_height = 7
-# leg_spacing = 0.5
-# elem_spacing = 5
-# connect_height = 0.2
-# elem_connect =2
-# nx = 7
-# ny = 16
+
 TEM_length = ${fparse 2 * leg_size + 4 *leg_spacing}
 x_max_line = ${fparse nx * TEM_length}
 y_last_row = ${fparse -(ny-1) *(leg_size + 2* leg_spacing)}
@@ -51,7 +42,6 @@ parallel_type=DISTRIBUTED
 []
 
 [Kernels]
-  # Heat DT
   [HeatDiff]
     type = ADHeatConduction
     variable = T
@@ -234,7 +224,6 @@ parallel_type=DISTRIBUTED
     pp_names = 'Vmax Vmin'
     expression = 'Vmax - Vmin'
   []
-
   [heat_in]
     type = ADSideDiffusiveFluxIntegral
     variable = T
@@ -252,7 +241,6 @@ parallel_type=DISTRIBUTED
     pp_names = 'I_out U_load'
     expression = '-U_load*I_out'
   []
-
 []
 
 [Preconditioning]

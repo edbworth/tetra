@@ -3,7 +3,7 @@ Created on July 15, 2026
 
 
 **run_batch_power.sh**
-This is a bash script to run multiple SLURM scripts that rune the module_cuboid_pattern_sq.i input file at varying currents. RUN this in the terminal and then run **plot_power_batch.py** to plot the Power vs. Current figure (see TEM_power_batch.png).
+This is a bash script to run multiple SLURM scripts that run the module_cuboid_pattern_sq.i input file at varying currents. RUN this in the terminal and then run **plot_power_batch.py** to plot the Power vs. Current figure (see TEM_power_batch.png).
 
 
 **flow_coupling** and **flow_coupling_I** 
