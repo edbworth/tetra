@@ -210,7 +210,7 @@ az = 14.4e-6
   []
   [nleg_thermal]
     type = ADHeatConductionMaterial
-    thermal_conductivity = 1.6
+    thermal_conductivity = 1.6      # [W/(m*K)]
     specific_heat = 100
     block = 'n_leg'
   []
@@ -225,7 +225,7 @@ az = 14.4e-6
     # Setup a material that will provide varying Seebeck coefficients with changing temperature
     type = ADThermalElectricMaterial
     temp = T
-    seebeck_temperature_function = 0.200e-3
+    seebeck_temperature_function = 0.200e-3     # [V/K]
     resistivity_temperature_function =${fparse 1/1.1e5}
     block = p_leg
     # outputs = exodus
@@ -257,7 +257,7 @@ az = 14.4e-6
     block =  '5'
   []
   [interconnect_TE]
-    # Setup a material that will provide varying Seebeck coefficients with chaing temperature
+    # Setup a material that will provide varying Seebeck coefficients with changing temperature (Thomson effect)
     type = ADThermalElectricMaterial
     temp = T
     seebeck_temperature_function = 6.5e-6
