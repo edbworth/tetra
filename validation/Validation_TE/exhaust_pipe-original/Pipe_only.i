@@ -11,15 +11,7 @@ ny_TE = 5
 pipe_inner = ${fparse nx_TE * TE_size + (nx_TE-1) * TE_spacing}
 pipe_length = ${fparse ny_TE * TE_size + (ny_TE-1) * TE_spacing + 2 * pipe_thickness}
 x_start = ${fparse pipe_thickness + 0.5 * pipe_inner}
-# p_out = 1.01e5
-# T_in = 600
-# vel_in = 20
 
-
-# A = ${fparse 0.5* pipe_inner^2}
-# P_wet = ${fparse 2 * pipe_inner}
-# P_hf = ${fparse P_wet}
-# Dh = ${fparse 4 * A/P_wet}
 
 
 [Mesh]
@@ -39,8 +31,8 @@ x_start = ${fparse pipe_thickness + 0.5 * pipe_inner}
   [mat]
     type = GenericConstantMaterial
     block = 1
-    prop_names = 'density specific_heat thermal_conductivity'
-    prop_values = '8050 466 45'
+    prop_names = 'density specific_heat thermal_conductivity'  # [kg/m^3] [J/(kg*K)] [W/(m*K)]
+    prop_values = '8050 466 45'     # AISI 304 Stainless Steel
   []
 []
 

@@ -1,28 +1,29 @@
 
 pipe_thickness = 2e-3
-pipe_elem = 3
+# pipe_elem = 3
 pipe_outs = 50e-3
-outs_elem=10
+# outs_elem=10
 
 TE_size_x = 36.8e-3
 TE_size_y = 37.6e-3
+# TE_size = 39.2e-3
 TE_spacing = 2e-3
-elem_TE = 40
-elem_spacing = 2
+# elem_TE = 40
+# elem_spacing = 2
 nx_TE = 4
 ny_TE = 5
 pipe_inner = ${fparse nx_TE * TE_size_x + (nx_TE-1) * TE_spacing}
 pipe_length = ${fparse ny_TE * TE_size_y + (ny_TE-1) * TE_spacing + 2 * pipe_outs}
 x_start = ${fparse pipe_thickness + 0.5 * pipe_inner}
-p_out = 1.01e5
-T_in = 600
-vel_in = 100
+p_out = 1.01e5                                        # Atmospheric pressure [Pa]
+T_in = 600                                            # Duct inlet temperature [K]
+vel_in = 100                                          # Gas velocity [m/s]
 
 
-A = ${fparse  pipe_inner * 15* pipe_thickness}
-P_wet = ${fparse 2*15*pipe_thickness+  pipe_inner}
-P_hf = ${fparse P_wet}
-Dh = ${fparse 4 * A/P_wet}
+A = ${fparse  pipe_inner * 15* pipe_thickness}        # Flow channel area [m^2]
+P_wet = ${fparse 2*15*pipe_thickness+  pipe_inner}    # Wetted perimeter aka heat flux perimeter
+P_hf = ${fparse P_wet}                                # heat flux perimeter [m]
+Dh = ${fparse 4 * A/P_wet}                            # Hydraulic diameter [m]
 
 
 [GlobalParams]
@@ -40,19 +41,21 @@ Dh = ${fparse 4 * A/P_wet}
 
 [FluidProperties]
   [air]
-    type = IdealGasFluidProperties
-    gamma = 1.4
-    k = 0.02551
-    mu = 1.8949e-5
+    type = IdealGasFluidProperties    # for air at T = 298 K
+    gamma = 1.4                       # Heat capacity ratio
+    k = 0.02551                       # Thermal conductivity [W/(m*K)]
+    mu = 1.8949e-5                    # Dynamic viscosity [kg/(m*s)]
   []
-
 []
 
 [Closures]
   [thm_closures]
     type = Closures1PhaseTHM
+    wall_htc_closure = dittus_boelter
+    wall_ff_closure = churchill
   []
 []
+
 [AuxVariables]
   [htc]
     family = MONOMIAL
@@ -63,11 +66,10 @@ Dh = ${fparse 4 * A/P_wet}
 [AuxKernels]
   [htc_aux]
     type = ADMaterialRealAux
-    property = Hw
+    property = Hw # Convective heat transfer coefficient [W/(m^2-K)]
     variable = htc
 []
 []
-
 
 [Components]
   [inlet]
