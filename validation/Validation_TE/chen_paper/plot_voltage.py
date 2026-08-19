@@ -44,3 +44,21 @@ ax.tick_params(axis='both', labelsize=20)
 plt.tight_layout()
 # plt.grid(alpha=0.4)
 plt.savefig('TEM_open_circuit_voltage.png', dpi=1000)
+
+
+
+# Calculate RMSE
+
+from scipy.interpolate import interp1d
+
+interpolated_sim = interp1d(sim_BiTe['T'], sim_BiTe['V'], kind="linear", fill_value="extrapolate")
+interpolated_sim_values = interpolated_sim(expr_BiTe['T'])
+
+interpolated_moose = interp1d(temp_diff, voltage, kind="linear", fill_value="extrapolate")
+interpolated_moose_values = interpolated_moose(expr_BiTe['T'])
+
+rmse_sim = np.sqrt(np.mean((expr_BiTe['V'] - interpolated_sim_values) ** 2))
+rmse_moose = np.sqrt(np.mean((expr_BiTe['V'] - interpolated_moose_values) ** 2))
+
+print(rmse_sim)
+print(rmse_moose)

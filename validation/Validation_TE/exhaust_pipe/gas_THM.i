@@ -1,14 +1,14 @@
 
 pipe_thickness = 2e-3
-pipe_elem = 3
+# pipe_elem = 3
 pipe_outs = 50e-3
-outs_elem=10
+# outs_elem=10
 
 TE_size_x = 36.8e-3
 TE_size_y = 37.6e-3
 TE_spacing = 2e-3
-elem_TE = 40
-elem_spacing = 2
+# elem_TE = 40
+# elem_spacing = 2
 nx_TE = 4
 ny_TE = 5
 pipe_inner = ${fparse nx_TE * TE_size_x + (nx_TE-1) * TE_spacing}
@@ -51,6 +51,8 @@ Dh = ${fparse 4 * A/P_wet}
 [Closures]
   [thm_closures]
     type = Closures1PhaseTHM
+    wall_htc_closure = dittus_boelter
+    wall_ff_closure = churchill
   []
 []
 [AuxVariables]

@@ -11,15 +11,7 @@ ny_TE = 5
 pipe_inner = ${fparse nx_TE * TE_size + (nx_TE-1) * TE_spacing}
 pipe_length = ${fparse ny_TE * TE_size + (ny_TE-1) * TE_spacing + 2 * pipe_thickness}
 x_start = ${fparse pipe_thickness + 0.5 * pipe_inner}
-# p_out = 1.01e5
-# T_in = 600
-# vel_in = 20
 
-
-# A = ${fparse 0.5* pipe_inner^2}
-# P_wet = ${fparse 2 * pipe_inner}
-# P_hf = ${fparse P_wet}
-# Dh = ${fparse 4 * A/P_wet}
 
 
 [Mesh]
@@ -156,7 +148,7 @@ x_start = ${fparse pipe_thickness + 0.5 * pipe_inner}
     max_procs_per_app = 2
     no_restore = true
     keep_solution_during_restore = true
-    update_old_solution_when_keeping_solution_during_restore = false
+    update_old_solution_when_keeping_solution_during_restore = true
   []
   [TE]
     type = FullSolveMultiApp
