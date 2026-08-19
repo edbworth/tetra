@@ -60,5 +60,13 @@ interpolated_moose_values = interpolated_moose(expr_BiTe['T'])
 rmse_sim = np.sqrt(np.mean((expr_BiTe['V'] - interpolated_sim_values) ** 2))
 rmse_moose = np.sqrt(np.mean((expr_BiTe['V'] - interpolated_moose_values) ** 2))
 
-print(rmse_sim)
-print(rmse_moose)
+range_expr = expr_BiTe['V'].max() - expr_BiTe['V'].min()
+
+norm_rmse_sim = (rmse_sim / range_expr) * 100
+norm_rmse_moose = (rmse_moose / range_expr) * 100
+
+print("-------------------------------")
+print("RMSE wrt Experimental Results:")
+print("-------------------------------")
+print("Chen et al. simulation: Raw = ", round(rmse_sim, 4), 'Normalized = ', round(norm_rmse_sim, 4))
+print("MOOSE simulation: Raw = ", round(rmse_moose, 4), "Normalized = ", round(norm_rmse_moose, 4))

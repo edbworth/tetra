@@ -102,5 +102,13 @@ interpolated_iso_values =  interpolated_iso(data_jaegle_disp["I"])
 rmse_disp_jaegle_aniso = np.sqrt(np.mean((data_jaegle_disp["disp"] - interpolated_aniso_values) ** 2))
 rmse_disp_jaegle_iso = np.sqrt(np.mean((data_jaegle_disp["disp"] - interpolated_iso_values) ** 2))
 
-print(rmse_disp_jaegle_aniso)
-print(rmse_disp_jaegle_iso)
+range_comsol = max(data_jaegle_disp["disp"]) - min(data_jaegle_disp["disp"])
+
+norm_aniso = (rmse_disp_jaegle_aniso / range_comsol) * 100
+norm_iso = (rmse_disp_jaegle_iso / range_comsol) * 100
+
+print("----------------------------")
+print("RMSE wrt Jaegle COMSOL")
+print("----------------------------")
+print("MOOSE anisotropic: Raw = ", f"{rmse_disp_jaegle_aniso:.4e}", ", Normalized = ", round(norm_aniso, 4))
+print("MOOSE isotropic: Raw = ", f"{rmse_disp_jaegle_iso:.4e}", ", Normalized = ", round(norm_iso, 4))
