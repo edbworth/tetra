@@ -1,5 +1,5 @@
 
-pipe_thickness = 2
+pipe_thickness = 2 # mm
 pipe_elem = 3
 pipe_outs = 50
 outs_elem = 20
@@ -7,12 +7,12 @@ outs_elem = 20
 
 TE_size_x = 36.8
 TE_size_y = 37.6
-TE_spacing = 2
+TE_spacing = 2 # mm
 elem_TE = 20
 elem_spacing = 2
-nx_TE = 4
-ny_TE = 5
-pipe_inner = ${fparse nx_TE * TE_size_x + (nx_TE-1) * TE_spacing}
+# nx_TE = 4
+# ny_TE = 5
+# pipe_inner = ${fparse nx_TE * TE_size_x + (nx_TE-1) * TE_spacing}
 
 
 [Mesh]
@@ -82,6 +82,7 @@ pipe_inner = ${fparse nx_TE * TE_size_x + (nx_TE-1) * TE_spacing}
     input = delete_center
     transform = SCALE
     vector_value = '0.001 0.001 0.001'
+    show_info = true
   []
 
 []

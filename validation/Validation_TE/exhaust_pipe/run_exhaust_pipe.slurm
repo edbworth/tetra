@@ -2,7 +2,7 @@
 
 # Submit this script with: sbatch run_exhaust_pipe.slurm
 
-#SBATCH --time=10:00:00 # walltime
+#SBATCH --time=02:30:00 # walltime
 #SBATCH --ntasks-per-node=112 # number of processor cores (i.e. tasks)
 #SBATCH --nodes=5 # number of nodes
 #SBATCH --wckey=ammt # Project Code
