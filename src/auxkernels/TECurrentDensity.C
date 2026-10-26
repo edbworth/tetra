@@ -31,14 +31,9 @@ TECurrentDensityTempl<is_ad>::validParams()
 template <bool is_ad>
 TECurrentDensityTempl<is_ad>::TECurrentDensityTempl(const InputParameters & parameters)
   : VectorAuxKernel(parameters),
-
     _is_es(getParam<bool>("electrostatic")),
     _grad_potential(isParamValid("potential") ? coupledGradient("potential") : _grad_zero),
-
-    // _seebeck(getADMaterialProperty<Real>("seebeck")),
-    // _resistivity(getADMaterialProperty<Real>("resistivity"))
-
-    _conductivity(getGenericMaterialProperty<Real, is_ad>("electrical_conductivity"))
+    _conductivity(getGenericMaterialProperty<Real, is_ad>("elec_conductivity"))
 {
   if (_is_es && !isParamValid("potential") && isParamValid("electric_field"))
   {

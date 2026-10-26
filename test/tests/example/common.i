@@ -1,17 +1,16 @@
-
 I = 0.7
 
 [Mesh]
-[cmg]
-    type                  = CartesianMeshGenerator
-    dim                   = 2
-    dx                    = '1'
-    dy                    = '0.1 5.8 0.1'
-    ix                    = '10'
-    iy                    = '3 42 3'
-    subdomain_id          = '1
-                             2
-                             3'
+  [cmg]
+      type                  = CartesianMeshGenerator
+      dim                   = 2
+      dx                    = '1'
+      dy                    = '0.1 5.8 0.1'
+      ix                    = '10'
+      iy                    = '3 42 3'
+      subdomain_id          = '1
+                              2
+                              3'
   []
   [rename_blocks]
     type                  = RenameBlockGenerator
@@ -19,31 +18,26 @@ I = 0.7
     old_block             = '1 2 3'
     new_block             = 'interconnect_cold p_leg interconnect_hot'
   []
-
-
-    [extrude]
+  [extrude]
     type = AdvancedExtruderGenerator
     input = rename_blocks
     heights = '1'
     num_layers = '10'
     direction = '0 0 1'
   []
-
   [EntireMesh]
     type = TransformGenerator
     input = extrude
     transform = SCALE # changes the scaling of the mesh from meters to millimeters
     vector_value = '0.001 0.001 0.001'
   []
-    [align_comsol]
+  [align_comsol]
     type = TransformGenerator
     input = EntireMesh
     transform = ROTATE
     vector_value = '-90 90 0'
   []
 []
-
-
 
 [Variables]
   [T]
@@ -101,9 +95,6 @@ I = 0.7
   []
 []
 
-
-
-
 [Materials]
   [J_mat]
     type = CurrentDensityMaterial
@@ -117,7 +108,7 @@ I = 0.7
     specific_heat = 100
     block = 'p_leg'
   []
- [pleg] # electrical properties of BiTe
+  [pleg] # electrical properties of BiTe
     type = ADThermalElectricMaterial
     temp = T
     seebeck_temperature_function = pleg_seebeck
@@ -157,14 +148,12 @@ I = 0.7
     pp_names = 'Vmax Vmin'
     expression = 'Vmax - Vmin'
   []
-
   [heat_in]
     type = ADSideDiffusiveFluxIntegral
     variable = T
     diffusivity = thermal_conductivity
     boundary = 'top'
   []
-
   [I_out]
     type = ADSideIntegralMaterialProperty
     property = current_density
@@ -176,7 +165,6 @@ I = 0.7
     pp_names = 'I_out U_load'
     expression = '-U_load*I_out'
   []
-
   [T_hot]
     type = SideAverageValue
     boundary = bottom

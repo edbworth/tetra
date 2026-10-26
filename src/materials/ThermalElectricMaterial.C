@@ -77,22 +77,6 @@ void
 ThermalElectricMaterialTempl<is_ad>::computeQpProperties()
 {
   {
-    // checking if temperature is below zero
-    // if (_has_temp)
-    // {
-      // if (_temperature[_qp] < 0)
-      // {
-      //   std::stringstream msg;
-      //   msg << "WARNING:  In HeatConductionMaterial:  negative temperature!\n"
-      //       << "\tResetting to zero.\n"
-      //       << "\t_qp: " << _qp << "\n"
-      //       << "\ttemp: " << _temperature[_qp] << "\n"
-      //       << "\telem: " << _current_elem->id() << "\n"
-      //       << "\tproc: " << processor_id() << "\n";
-      //   mooseError(msg.str());
-      // }
-    // }
-    // if seebeck is a function of temperature
     if (_seebeck_temperature_function)
     {
       _seebeck[_qp] = _seebeck_temperature_function->value(_temperature[_qp]);
@@ -106,7 +90,6 @@ ThermalElectricMaterialTempl<is_ad>::computeQpProperties()
       _seebeck[_qp] = _my_seebeck;
       _Thomson[_qp] = 0.;
     }
-
     if (_resistivity_temperature_function)
     {
       _resistivity[_qp] = _resistivity_temperature_function->value(_temperature[_qp]);
@@ -116,9 +99,6 @@ ThermalElectricMaterialTempl<is_ad>::computeQpProperties()
       _resistivity[_qp] = _my_resistivity;
     }
     _Peltier[_qp] = _seebeck[_qp] * _temperature[_qp];
-
-    // using std::abs;
-    // if (std::abs(_resistivity[_qp]) > 1e-12)
     if (abs(_resistivity[_qp]) > 1e-12)
     {
       _elec_conductivity[_qp] = 1 / _resistivity[_qp];
